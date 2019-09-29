@@ -1,4 +1,8 @@
 """
+I typed this just now to make sure the change is reflected in the repository.
+"""
+
+"""
 The purpose of this program is to solve the 8 Queens Problem.
 The task is to find a way to place 8 queens on a chess board
 in such a way that none of them are attacking each other. 
