@@ -65,12 +65,12 @@ def isValid(board, startRank, startFile):
 def printSolution(board):
     listOfPositions = ' '
     NumRanksandFiles = 8
-    #go through the board
+    #go through the board by file
     for f in range(NumRanksandFiles):
         for r in range(NumRanksandFiles):
             if(board[r][f] == QUEEN):
                 listOfPositions += numToRealFileAndRank(r,f) #add position to solution
-                r = 8 #end the search for a queen in this rank
+                r = NumRanksandFiles #end the search for a queen in this file
     print(listOfPositions) #print out the solution
 
 def findQueensSlow(board, file = AFILE):
