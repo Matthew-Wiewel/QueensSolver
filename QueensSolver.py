@@ -6,12 +6,14 @@ I will write a function to translate
 Queens in the board will be represented with a 1
 """
 #define some constants to be used to avoid magic numbers
+#to change the NxN board size, change NumRanksAndFile to the desired N
 QUEEN = 1
 EMPTY = 0
 AFILE = 0
-HFILE = 7
 RANK1 = 0
-RANK8 = 7
+NumRanksandFiles = 8
+HFILE = NumRanksandFiles - 1
+RANK8 = NumRanksandFiles - 1
 
 
 def numToRealFileAndRank(rank, file):
@@ -64,7 +66,6 @@ def isValid(board, startRank, startFile):
 
 def printSolution(board):
     listOfPositions = ' '
-    NumRanksandFiles = 8
     #go through the board by file
     for f in range(NumRanksandFiles):
         for r in range(NumRanksandFiles):
@@ -100,5 +101,5 @@ def findQueensSlow(board, file = AFILE):
         if rank > RANK8: # we are out of bounds for this file, so return to previous
             return
 
-board = [ [EMPTY for file in range(8)] for rank in range(8) ]
+board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles) ]
 findQueensSlow(board)
