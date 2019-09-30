@@ -147,10 +147,6 @@ def findQueensSlow(board, file = AFILE):
 
         if rank > RANK8: # we are out of bounds for this file, so return to previous
             return
-        
-        # your issue is that when you return, you don't clear the previous queen
-        # so instead of moving the queen down one on a return, you're just adding
-        # a new one to the file.
 
 board = [ [EMPTY for file in range(8)] for rank in range(8) ]
 findQueensSlow(board)
