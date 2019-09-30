@@ -1,25 +1,4 @@
 """
-I typed this just now to make sure the change is reflected in the repository.
-"""
-
-"""
-The purpose of this program is to solve the 8 Queens Problem.
-The task is to find a way to place 8 queens on a chess board
-in such a way that none of them are attacking each other. 
-To solve this problem, this program will use a recursive depth-first
-search to find a solution.
-"""
-
-"""
-def findQueens(coordinate, rank):
-    #if we have gone down this far, there isn't a solution yet
-    if(rank > 7):
-        return False;
-    
-    int nextQueenRank = bull;
-"""  
-
-"""
 idea of findQueens func
 will place a queen as far to the top as it can, going down each file until getting a solution
 base case will be if going to the I file to stop
@@ -148,7 +127,7 @@ def findQueensSlow(board, file = AFILE):
     no queen is being attacked by another queen. It will use a depth-first method,
     hence being labelled a slow version. 
     """
-    print("In find queen slow with file = ", file)
+  #  print("In find queen slow with file = ", file)
     #when placing queens, we will start by placing them on the first rank in the file
     rank = RANK1
 
@@ -162,13 +141,19 @@ def findQueensSlow(board, file = AFILE):
             board[rank][file] = EMPTY
         elif file < HFILE: #we have a valid queen but haven't placed 8 yet so go to the next file
             findQueensSlow(board, file + 1)
+            board[rank][file] = EMPTY # clear out previous queen now that we've returned
         elif file == HFILE: #we have 8 queens on the board so let's print a solution
             printSolution(board)
+            board[rank][file] = EMPTY
         
         rank += 1 #advance rank for next iteration
 
         if rank > RANK8: # we are out of bounds for this file, so return to previous
             return
+        
+        # your issue is that when you return, you don't clear the previous queen
+        # so instead of moving the queen down one on a return, you're just adding
+        # a new one to the file.
 
 board = [ [EMPTY for file in range(8)] for rank in range(8) ]
 findQueensSlow(board)
