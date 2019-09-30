@@ -127,7 +127,6 @@ def findQueensSlow(board, file = AFILE):
     no queen is being attacked by another queen. It will use a depth-first method,
     hence being labelled a slow version. 
     """
-  #  print("In find queen slow with file = ", file)
     #when placing queens, we will start by placing them on the first rank in the file
     rank = RANK1
 
@@ -137,15 +136,13 @@ def findQueensSlow(board, file = AFILE):
         #place a queen on the board in this file
         board[rank][file] = QUEEN
 
-        if not isValid(board, rank, file): #we have a bad position so try again in next iteration
-            board[rank][file] = EMPTY
-        elif file < HFILE: #we have a valid queen but haven't placed 8 yet so go to the next file
-            findQueensSlow(board, file + 1)
-            board[rank][file] = EMPTY # clear out previous queen now that we've returned
-        elif file == HFILE: #we have 8 queens on the board so let's print a solution
-            printSolution(board)
-            board[rank][file] = EMPTY
+        if isValid(board, rank, file): #we have a valid position so we'll either make a call or print a solution
+            if file < HFILE: #we have a valid queen but haven't placed 8 yet so go to the next file
+                findQueensSlow(board, file + 1)
+            else: # file must equal the H-File and we have 8 queens on the board so let's print a solution
+                printSolution(board)
         
+        board[rank][file] = EMPTY # now that we went through that position, clear queen before trying next position
         rank += 1 #advance rank for next iteration
 
         if rank > RANK8: # we are out of bounds for this file, so return to previous
