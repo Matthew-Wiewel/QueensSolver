@@ -27,6 +27,12 @@ def isValid(board, startRank, startFile):
     """
     This function checks whether or not a queen is placed on a 
     valid square of the chess board.
+    The reason it only checks only for queens in one direction is because
+    same file attacks are negated by the way queens are placed with each call
+    being a separate file. In addition to that, when a queen is placed, there are
+    no queens to its right on the board so that region is clear. Therefore only
+    the left diagonals and rank needs to be checked as those are the only avenues
+    for a potential attack on the queen.
     """
     #check to the left of the queen first
     for f in range(startFile):
@@ -58,12 +64,13 @@ def isValid(board, startRank, startFile):
 
 def printSolution(board):
     listOfPositions = ' '
+    NumRanksandFiles = 8
     #go through the board
-    for r in range(8):
-        for f in range(8):
+    for f in range(NumRanksandFiles):
+        for r in range(NumRanksandFiles):
             if(board[r][f] == QUEEN):
-                listOfPositions += numToRealFileAndRank(f,r) #add position to solution
-                f = 8 #end the search for a queen in this rank
+                listOfPositions += numToRealFileAndRank(r,f) #add position to solution
+                r = 8 #end the search for a queen in this rank
     print(listOfPositions) #print out the solution
 
 def findQueensSlow(board, file = AFILE):
