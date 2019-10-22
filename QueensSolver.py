@@ -130,9 +130,11 @@ def findQueensDFS(board, file = AFILE):
         if rank > RANK8 or haveFoundSolution:
             return haveFoundSolution
 
-board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles) ]
-print("Fiding all solutions to the board")
-findQueensAll(board)
+# if we've got a relatively small N, then we'll find all the solutions, otherwise it takes a while to run the findAllQueens            
+if NumRanksandFiles < 12:
+    board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles) ]
+    print("Finding all solutions to the board with DFS")
+    findQueensAll(board)
 
 board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles)]
 print("Finding one solution to the board with DFS")
