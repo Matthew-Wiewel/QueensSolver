@@ -101,5 +101,39 @@ def findQueensAll(board, file = AFILE):
         if rank > RANK8: # we are out of bounds for this file, so return to previous
             return
 
+def findQueensDFS(board, file = AFILE):
+    """
+    This function finds 1 solution for the board using a DFS search
+    """
+
+    rank = RANK1 # when placing queens, start by placing them on the first rank in the file
+    haveFoundSolution = False # used to note if we have found a solutuion
+
+    # do-while we have not found a soluiton
+    while not haveFoundSolution:
+
+        #place queen in this square
+        board[rank][file] = QUEEN
+
+        if isValid(board, rank, file): # if it's a valid board, we either have a solution or can go deeper in DFS
+            if file < HFILE: # the case where we have not yet placed all N queens, recurse
+                haveFoundSolution = findQueensDFS(board, file +1)
+            else: #we've got a solution, so print it and return True because we've found a solution
+                printSolution(board)
+                return True
+        
+        #clear our bad queen and get ready to place on in the next rank
+        board[rank][file] = EMPTY
+        rank += 1
+
+        # if we've exceeded the bounds of the board or we've found a solution, let's return
+        if rank > RANK8 or haveFoundSolution:
+            return haveFoundSolution
+
 board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles) ]
+print("Fiding all solutions to the board")
 findQueensAll(board)
+
+board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles)]
+print("Finding one solution to the board with DFS")
+findQueensDFS(board)
