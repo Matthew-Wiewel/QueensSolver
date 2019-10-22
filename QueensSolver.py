@@ -74,7 +74,7 @@ def printSolution(board):
                 r = NumRanksandFiles #end the search for a queen in this file
     print(listOfPositions) #print out the solution
 
-def findQueensSlow(board, file = AFILE):
+def findQueensAll(board, file = AFILE):
     """
     This is a function to find locations for 8 queens on a chess board such that
     no queen is being attacked by another queen. It will use a depth-first method,
@@ -91,7 +91,7 @@ def findQueensSlow(board, file = AFILE):
 
         if isValid(board, rank, file): #we have a valid position so we'll either make a call or print a solution
             if file < HFILE: #we have a valid queen but haven't placed 8 yet so go to the next file
-                findQueensSlow(board, file + 1)
+                findQueensAll(board, file + 1)
             else: # file must equal the H-File and we have 8 queens on the board so let's print a solution
                 printSolution(board)
         
@@ -102,4 +102,4 @@ def findQueensSlow(board, file = AFILE):
             return
 
 board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles) ]
-findQueensSlow(board)
+findQueensAll(board)
