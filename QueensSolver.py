@@ -130,7 +130,9 @@ def findQueensDFS(board, file = AFILE):
         if rank > RANK8 or haveFoundSolution:
             return haveFoundSolution
 
-# if we've got a relatively small N, then we'll find all the solutions, otherwise it takes a while to run the findAllQueens            
+# if we've got a relatively small N, then we'll find all the solutions
+# otherwise it may take some time to run. N=11 take a couple second, N=12 takes a little less than half a minute, N=13 takes a couple minutes
+# and my personal preference when using this program is to not take long on this part        
 if NumRanksandFiles < 12:
     board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles) ]
     print("Finding all solutions to the board with DFS")
