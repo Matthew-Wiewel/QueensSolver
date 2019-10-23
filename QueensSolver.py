@@ -1,12 +1,11 @@
 """
+With the standard 8x8 chess board
 Files A - H are 0-7
 Ranks 1-8 are 0-7
-I will write a function to translate
-
-Queens in the board will be represented with a 1
 """
 #define some constants to be used to avoid magic numbers
 #to change the NxN board size, change NumRanksAndFile to the desired N
+import time
 QUEEN = 1
 EMPTY = 0
 AFILE = 0
@@ -65,7 +64,7 @@ def isValid(board, startRank, startFile):
     return True
 
 def printSolution(board):
-    listOfPositions = ' '
+    listOfPositions = ''
     #go through the board by file
     for f in range(NumRanksandFiles):
         for r in range(NumRanksandFiles):
@@ -140,4 +139,7 @@ if NumRanksandFiles < 12:
 
 board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles)]
 print("Finding one solution to the board with DFS")
+startTime = time.process_time()
 findQueensDFS(board)
+endTime = time.process_time()
+print("Time taken: ", endTime - startTime)
