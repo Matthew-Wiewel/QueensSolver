@@ -6,16 +6,16 @@ Ranks 1-8 are 0-7
 #define some constants to be used to avoid magic numbers
 #to change the NxN board size, change NumRanksAndFile to the desired N
 import time
-QUEEN = 1
-EMPTY = 0
-AFILE = 0
-RANK1 = 0
-NumRanksandFiles = 8
-HFILE = NumRanksandFiles - 1
-RANK8 = NumRanksandFiles - 1
+QUEEN: int = 1
+EMPTY: int = 0
+AFILE: int = 0
+RANK1: int = 0
+NumRanksandFiles: int = 8
+HFILE: int = NumRanksandFiles - 1
+RANK8: int = NumRanksandFiles - 1
 
 
-def numToRealFileAndRank(rank, file):
+def numToRealFileAndRank(rank: int, file: int) -> str:
     """
     Takes the underlying representations of files and ranks and
     coverts them to the standard notation. ie 0,3 to A4
@@ -24,7 +24,7 @@ def numToRealFileAndRank(rank, file):
     realRank = 1 + rank # convert rank to 1-8
     return realFile + str(realRank) + ' ' # return the board position
 
-def isValid(board, startRank, startFile):
+def isValid(board, startRank: int, startFile: int) -> bool:
     """
     This function checks whether or not a queen is placed on a 
     valid square of the chess board.
@@ -41,8 +41,8 @@ def isValid(board, startRank, startFile):
             return False #found a queen that can attack, not a good square
     
     #now to check the lower left diagonal
-    diagFile = startFile - 1
-    diagRank = startRank - 1
+    diagFile: int = startFile - 1
+    diagRank: int = startRank - 1
     while diagFile >= AFILE and diagRank >= RANK1:
         if board[diagRank][diagFile] == QUEEN:
             return False
@@ -63,8 +63,8 @@ def isValid(board, startRank, startFile):
     #if we made it through the three checks, then the queen is in a valid place
     return True
 
-def printSolution(board):
-    listOfPositions = ''
+def printSolution(board) -> None:
+    listOfPositions = ''# initialize an empty list
     #go through the board by file
     for f in range(NumRanksandFiles):
         for r in range(NumRanksandFiles):
@@ -73,7 +73,7 @@ def printSolution(board):
                 r = NumRanksandFiles #end the search for a queen in this file
     print(listOfPositions) #print out the solution
 
-def findQueensAll(board, file = AFILE):
+def findQueensAll(board, file: int = AFILE) -> None:
     """
     This is a function to find locations for 8 queens on a chess board such that
     no queen is being attacked by another queen. It will use a depth-first method,
@@ -100,13 +100,13 @@ def findQueensAll(board, file = AFILE):
         if rank > RANK8: # we are out of bounds for this file, so return to previous
             return
 
-def findQueensDFS(board, file = AFILE):
+def findQueensDFS(board, file: int = AFILE) -> bool:
     """
     This function finds 1 solution for the board using a DFS search
     """
 
-    rank = RANK1 # when placing queens, start by placing them on the first rank in the file
-    haveFoundSolution = False # used to note if we have found a solutuion
+    rank: int = RANK1 # when placing queens, start by placing them on the first rank in the file
+    haveFoundSolution: bool = False # used to note if we have found a solutuion
 
     # do-while we have not found a soluiton
     while not haveFoundSolution:
