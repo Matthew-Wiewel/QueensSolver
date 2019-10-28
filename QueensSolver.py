@@ -6,6 +6,7 @@ Ranks 1-8 are 0-7
 #define some constants to be used to avoid magic numbers
 #to change the NxN board size, change NumRanksAndFile to the desired N
 import time
+from typing import List
 QUEEN: int = 1
 EMPTY: int = 0
 AFILE: int = 0
@@ -63,7 +64,7 @@ def isValid(board, startRank: int, startFile: int) -> bool:
     #if we made it through the three checks, then the queen is in a valid place
     return True
 
-def printSolution(board) -> None:
+def printSolution(board: List[List[int]]) -> None:
     listOfPositions = ''# initialize an empty list
     #go through the board by file
     for f in range(NumRanksandFiles):
@@ -73,7 +74,7 @@ def printSolution(board) -> None:
                 r = NumRanksandFiles #end the search for a queen in this file
     print(listOfPositions) #print out the solution
 
-def findQueensAll(board, file: int = AFILE) -> None:
+def findQueensAll(board: List[List[int]], file: int = AFILE) -> None:
     """
     This is a function to find locations for 8 queens on a chess board such that
     no queen is being attacked by another queen. It will use a depth-first method,
@@ -100,7 +101,7 @@ def findQueensAll(board, file: int = AFILE) -> None:
         if rank > RANK8: # we are out of bounds for this file, so return to previous
             return
 
-def findQueensDFS(board, file: int = AFILE) -> bool:
+def findQueensDFS(board: List[List[int]], file: int = AFILE) -> bool:
     """
     This function finds 1 solution for the board using a DFS search
     """
@@ -137,7 +138,7 @@ if NumRanksandFiles < 12:
     print("Finding all solutions to the board with DFS")
     findQueensAll(board)
 
-board = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles)]
+board: List[List[int]] = [ [EMPTY for file in range(NumRanksandFiles)] for rank in range(NumRanksandFiles)]
 print("Finding one solution to the board with DFS")
 startTime = time.process_time()
 findQueensDFS(board)
